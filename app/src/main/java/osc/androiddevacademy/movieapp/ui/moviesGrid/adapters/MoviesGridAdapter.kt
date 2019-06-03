@@ -1,4 +1,4 @@
-package osc.androiddevacademy.movieapp.ui
+package osc.androiddevacademy.movieapp.ui.moviesGrid.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

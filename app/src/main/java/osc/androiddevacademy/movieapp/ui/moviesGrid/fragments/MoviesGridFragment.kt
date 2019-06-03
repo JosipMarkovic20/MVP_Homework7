@@ -1,4 +1,4 @@
-package osc.androiddevacademy.movieapp.ui
+package osc.androiddevacademy.movieapp.ui.moviesGrid.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +15,9 @@ import osc.androiddevacademy.movieapp.model.Movie
 import osc.androiddevacademy.movieapp.model.MoviesResponse
 import osc.androiddevacademy.movieapp.networking.BackendFactory
 import osc.androiddevacademy.movieapp.networking.interactors.MovieInteractor
+import osc.androiddevacademy.movieapp.presentation.MoviesGridPresenter
+import osc.androiddevacademy.movieapp.ui.movieDetails.fragments.MoviesPagerFragment
+import osc.androiddevacademy.movieapp.ui.moviesGrid.adapters.MoviesGridAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,8 +33,11 @@ class MoviesGridFragment : Fragment() {
     }
     private val apiInteractor: MovieInteractor by lazy { BackendFactory.getMovieInteractor() }
     private val appDatabase by lazy { MoviesDatabase.getInstance(App.getAppContext()) }
+    private var movieList: ArrayList<Movie> = arrayListOf()
 
-    private val movieList = arrayListOf<Movie>()
+    private val presenter: MoviesGridContract.Presenter by lazy {
+        MoviesGridPresenter(apiInteractor,gridAdapter)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,33 +64,18 @@ class MoviesGridFragment : Fragment() {
     }
 
     private fun requestPopularMovies() {
-        apiInteractor.getPopularMovies(popularMoviesCallback())
+        movieList = presenter.onGetPopularMovies()
     }
 
-    private fun popularMoviesCallback(): Callback<MoviesResponse> =
-        object : Callback<MoviesResponse> {
-            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
 
-            }
-
-            override fun onResponse(
-                call: Call<MoviesResponse>,
-                response: Response<MoviesResponse>
-            ) {
-                if (response.isSuccessful) {
-                    response.body()?.movies?.run {
-                        movieList.clear()
-                        movieList.addAll(this)
-                        gridAdapter.setMovies(movieList)
-                    }
-                }
-            }
-        }
 
     private fun onMovieClicked(movie: Movie) {
         activity?.showFragment(
             R.id.mainFragmentHolder,
-            MoviesPagerFragment.getInstance(movieList, movie),
+            MoviesPagerFragment.getInstance(
+                movieList,
+                movie
+            ),
             true
         )
     }

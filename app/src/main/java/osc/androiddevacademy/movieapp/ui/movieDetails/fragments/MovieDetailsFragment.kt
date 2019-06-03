@@ -1,4 +1,4 @@
-package osc.androiddevacademy.movieapp.ui
+package osc.androiddevacademy.movieapp.ui.movieDetails.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +15,7 @@ import osc.androiddevacademy.movieapp.model.Movie
 import osc.androiddevacademy.movieapp.model.ReviewsResponse
 import osc.androiddevacademy.movieapp.networking.BackendFactory
 import osc.androiddevacademy.movieapp.networking.interactors.MovieInteractor
+import osc.androiddevacademy.movieapp.ui.movieReview.ReviewAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +30,8 @@ class MovieDetailsFragment : Fragment() {
         private const val MOVIE_EXTRA = "movie_extra"
 
         fun getInstance(movie: Movie): MovieDetailsFragment {
-            val fragment = MovieDetailsFragment()
+            val fragment =
+                MovieDetailsFragment()
             val bundle = Bundle()
             bundle.putParcelable(MOVIE_EXTRA, movie)
             fragment.arguments = bundle

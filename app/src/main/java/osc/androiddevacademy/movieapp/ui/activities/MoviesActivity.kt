@@ -1,9 +1,10 @@
-package osc.androiddevacademy.movieapp.ui
+package osc.androiddevacademy.movieapp.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import osc.androiddevacademy.movieapp.R
 import osc.androiddevacademy.movieapp.common.showFragment
+import osc.androiddevacademy.movieapp.ui.moviesGrid.fragments.MoviesGridFragment
 
 class MoviesActivity : AppCompatActivity() {
 
@@ -15,6 +16,8 @@ class MoviesActivity : AppCompatActivity() {
     }
 
     private fun initMoviesGridFragment(){
-        showFragment(R.id.mainFragmentHolder, MoviesGridFragment())
+        showFragment(R.id.mainFragmentHolder,
+            MoviesGridFragment()
+        )
     }
 }

@@ -1,9 +1,10 @@
-package osc.androiddevacademy.movieapp.ui
+package osc.androiddevacademy.movieapp.ui.movieDetails.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import osc.androiddevacademy.movieapp.model.Movie
+import osc.androiddevacademy.movieapp.ui.movieDetails.fragments.MovieDetailsFragment
 
 class MoviePagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 

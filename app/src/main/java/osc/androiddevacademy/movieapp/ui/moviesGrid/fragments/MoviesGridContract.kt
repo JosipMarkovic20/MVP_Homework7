@@ -6,7 +6,7 @@ interface MoviesGridContract {
 
     interface View{
 
-        fun onMovieListRecieved(tasks: MutableList<Movie>)
+        fun onMovieListRecieved(movies: MutableList<Movie>)
 
         fun onGetMoviesFailed()
 
@@ -14,9 +14,9 @@ interface MoviesGridContract {
 
     interface Presenter{
 
-        fun setView(view: MoviesGridContract.View)
+        fun setView(view: View)
 
-        fun onGetPopularMovies(): ArrayList<Movie>
+        fun onGetPopularMovies()
 
     }
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragemnt_movie_grid.*
 import osc.androiddevacademy.movieapp.App
 import osc.androiddevacademy.movieapp.R
+import osc.androiddevacademy.movieapp.common.displayToast
 import osc.androiddevacademy.movieapp.common.showFragment
 import osc.androiddevacademy.movieapp.database.MoviesDatabase
 import osc.androiddevacademy.movieapp.model.Movie
@@ -22,7 +23,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MoviesGridFragment : Fragment() {
+class MoviesGridFragment : Fragment(), MoviesGridContract.View {
+
 
     private val SPAN_COUNT = 2
 
@@ -61,10 +63,21 @@ class MoviesGridFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requestPopularMovies()
+        presenter.setView(this)
+    }
+
+    override fun onMovieListRecieved(movies: MutableList<Movie>) {
+        movieList.clear()
+        movieList.addAll(movies)
+        gridAdapter.setMovies(movieList)
+    }
+
+    override fun onGetMoviesFailed() {
+        activity?.displayToast(getString(R.string.Error))
     }
 
     private fun requestPopularMovies() {
-        movieList = presenter.onGetPopularMovies()
+        presenter.onGetPopularMovies()
     }
 
 

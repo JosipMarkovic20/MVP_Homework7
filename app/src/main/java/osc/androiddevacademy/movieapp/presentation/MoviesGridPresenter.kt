@@ -14,21 +14,18 @@ class MoviesGridPresenter(private val interactor: MovieInteractor, private val g
 
     private lateinit var view: MoviesGridContract.View
 
-    val movieList = arrayListOf<Movie>()
-
     override fun setView(view: MoviesGridContract.View) {
         this.view = view
     }
 
-    override fun onGetPopularMovies(): ArrayList<Movie>{
+    override fun onGetPopularMovies(){
         interactor.getPopularMovies(popularMoviesCallback())
-        return movieList
     }
 
     private fun popularMoviesCallback(): Callback<MoviesResponse> =
         object : Callback<MoviesResponse> {
             override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
-
+                view.onGetMoviesFailed()
             }
 
             override fun onResponse(
@@ -37,9 +34,7 @@ class MoviesGridPresenter(private val interactor: MovieInteractor, private val g
             ) {
                 if (response.isSuccessful) {
                     response.body()?.movies?.run {
-                        movieList.clear()
-                        movieList.addAll(this)
-                        gridAdapter.setMovies(movieList)
+                        view.onMovieListRecieved(this)
                     }
                 }
             }

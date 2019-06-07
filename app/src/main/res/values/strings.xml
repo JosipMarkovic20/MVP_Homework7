@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MovieApp</string>
     <string name="Error">Something went wrong!</string>
+    <string name="Remove_fav">Movie has been removed from favourites.</string>
+    <string name="Add_fav">Movie has been added to favorites.</string>
+    <string name="no_favs">There are no favorites at this time!</string>
 </resources>

@@ -3,6 +3,7 @@ package osc.androiddevacademy.movieapp.networking.interactors
 import osc.androiddevacademy.movieapp.model.Movie
 import osc.androiddevacademy.movieapp.model.MoviesResponse
 import osc.androiddevacademy.movieapp.model.ReviewsResponse
+import osc.androiddevacademy.movieapp.model.TopRatedResponse
 import osc.androiddevacademy.movieapp.networking.MovieApiService
 import retrofit2.Callback
 
@@ -12,7 +13,7 @@ class MovieInteractorImpl(private val apiService: MovieApiService): MovieInterac
         apiService.getPopularMovies().enqueue(popularMoviesCallback)
     }
 
-    override fun getTopMovies(topMoviesCallback: Callback<MoviesResponse>) {
+    override fun getTopMovies(topMoviesCallback: Callback<TopRatedResponse>) {
         apiService.getTopMovies().enqueue(topMoviesCallback)
     }
 

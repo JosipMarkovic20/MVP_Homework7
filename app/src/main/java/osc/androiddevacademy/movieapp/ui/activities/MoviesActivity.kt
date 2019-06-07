@@ -5,19 +5,19 @@ import android.os.Bundle
 import osc.androiddevacademy.movieapp.R
 import osc.androiddevacademy.movieapp.common.showFragment
 import osc.androiddevacademy.movieapp.ui.moviesGrid.fragments.MoviesGridFragment
+import osc.androiddevacademy.movieapp.ui.moviesGrid.fragments.PagerFragment
 
 class MoviesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
-
         initMoviesGridFragment()
     }
 
     private fun initMoviesGridFragment(){
         showFragment(R.id.mainFragmentHolder,
-            MoviesGridFragment()
+            PagerFragment()
         )
     }
 }

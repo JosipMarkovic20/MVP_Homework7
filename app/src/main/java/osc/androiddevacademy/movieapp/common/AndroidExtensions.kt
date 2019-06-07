@@ -1,5 +1,6 @@
 package osc.androiddevacademy.movieapp.common
 
+import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -15,4 +16,16 @@ fun FragmentActivity.showFragment(containerId: Int, fragment: Fragment, shouldAd
             addToBackStack(tag)
         }
     }.replace(containerId, fragment).commitAllowingStateLoss()
+}
+
+fun View.visible(){
+    visibility = View.VISIBLE
+}
+
+fun View.gone(){
+    visibility = View.GONE
+}
+
+fun View.invisible(){
+    visibility = View.INVISIBLE
 }

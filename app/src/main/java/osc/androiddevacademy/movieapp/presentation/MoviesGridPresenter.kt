@@ -1,15 +1,13 @@
 package osc.androiddevacademy.movieapp.presentation
 
-import osc.androiddevacademy.movieapp.model.Movie
 import osc.androiddevacademy.movieapp.model.MoviesResponse
 import osc.androiddevacademy.movieapp.networking.interactors.MovieInteractor
-import osc.androiddevacademy.movieapp.ui.moviesGrid.adapters.MoviesGridAdapter
 import osc.androiddevacademy.movieapp.ui.moviesGrid.fragments.MoviesGridContract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MoviesGridPresenter(private val interactor: MovieInteractor, private val gridAdapter: MoviesGridAdapter): MoviesGridContract.Presenter {
+class MoviesGridPresenter(private val interactor: MovieInteractor): MoviesGridContract.Presenter {
 
 
     private lateinit var view: MoviesGridContract.View

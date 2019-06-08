@@ -66,6 +66,8 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
     }
 
     override fun onMovieListRecieved(movies: List<Movie>) {
+        movieList.clear()
+        movieList.addAll(movies)
         gridAdapter.setMovies(movies)
     }
 

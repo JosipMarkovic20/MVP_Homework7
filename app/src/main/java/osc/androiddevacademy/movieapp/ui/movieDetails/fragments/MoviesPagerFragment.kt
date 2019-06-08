@@ -1,6 +1,7 @@
 package osc.androiddevacademy.movieapp.ui.movieDetails.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,13 @@ class MoviesPagerFragment : Fragment() {
         )
     }
 
+    private fun checkId(movie: Movie): Int {
+        for (x in 0 until movieList.size) {
+            if (  movie.id == movieList[x].id) return x
+        }
+        return 0
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pager, container, false)
     }
@@ -44,7 +52,11 @@ class MoviesPagerFragment : Fragment() {
 
         moviePager.adapter = pagerAdapter
 
+        val position = checkId(arguments!!.getParcelable(PAGER_SELECTED_MOVIE_EXTRA))
+
         pagerAdapter.setMovies(movieList)
+
+        moviePager.setCurrentItem(position)
     }
 
 }

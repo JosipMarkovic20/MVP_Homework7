@@ -1,5 +1,7 @@
 package osc.androiddevacademy.movieapp.presentation
 
+import osc.androiddevacademy.movieapp.database.MoviesDatabase
+import osc.androiddevacademy.movieapp.model.Movie
 import osc.androiddevacademy.movieapp.model.MoviesResponse
 import osc.androiddevacademy.movieapp.networking.interactors.MovieInteractor
 import osc.androiddevacademy.movieapp.ui.moviesGrid.fragments.MoviesGridContract
@@ -37,4 +39,15 @@ class MoviesGridPresenter(private val interactor: MovieInteractor): MoviesGridCo
                 }
             }
         }
+
+    override fun onFavoriteClicked(movie: Movie, appDatabase: MoviesDatabase) {
+        val findMovie: Movie? = appDatabase.moviesDao().getMovie(movie.id)
+        if(findMovie?.id==movie.id){
+            appDatabase.moviesDao().deleteFavoriteMovie(findMovie)
+            view.favRemoved()
+        }else{
+            appDatabase.moviesDao().addFavoriteMovie(movie)
+            view.favAdded()
+        }
+    }
 }

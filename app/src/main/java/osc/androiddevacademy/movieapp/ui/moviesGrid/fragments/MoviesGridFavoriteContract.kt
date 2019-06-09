@@ -10,6 +10,9 @@ interface MoviesGridFavoriteContract {
 
         fun movieListEmpty()
 
+        fun favAdded()
+
+        fun favRemoved()
     }
 
     interface Presenter{
@@ -17,6 +20,8 @@ interface MoviesGridFavoriteContract {
         fun setView(view: View)
 
         fun onGetFavoriteMovies()
+
+        fun onFavoriteClicked(movie: Movie)
 
     }
 

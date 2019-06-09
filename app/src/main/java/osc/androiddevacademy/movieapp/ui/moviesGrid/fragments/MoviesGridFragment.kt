@@ -87,16 +87,16 @@ class MoviesGridFragment : Fragment(), MoviesGridContract.View {
         )
     }
 
-    private fun onFavoriteClicked(movie: Movie) {
-        val findMovie: Movie? = appDatabase.moviesDao().getMovie(movie.id)
-        if(findMovie?.id==movie.id){
-            appDatabase.moviesDao().deleteFavoriteMovie(findMovie)
-            activity?.displayToast(getString(R.string.Remove_fav))
-        }else {
-            appDatabase.moviesDao().addFavoriteMovie(movie)
-            activity?.displayToast(getString(R.string.Add_fav))
-        }
+    override fun favAdded() {
+        activity?.displayToast(getString(R.string.Add_fav))
+    }
 
+    override fun favRemoved() {
+        activity?.displayToast(getString(R.string.Remove_fav))
+    }
+
+    private fun onFavoriteClicked(movie: Movie) {
+        presenter.onFavoriteClicked(movie, appDatabase)
     }
 
 }

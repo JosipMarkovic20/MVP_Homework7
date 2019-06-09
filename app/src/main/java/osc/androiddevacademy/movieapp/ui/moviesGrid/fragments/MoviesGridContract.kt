@@ -1,5 +1,6 @@
 package osc.androiddevacademy.movieapp.ui.moviesGrid.fragments
 
+import osc.androiddevacademy.movieapp.database.MoviesDatabase
 import osc.androiddevacademy.movieapp.model.Movie
 
 interface MoviesGridContract {
@@ -10,6 +11,9 @@ interface MoviesGridContract {
 
         fun onGetMoviesFailed()
 
+        fun favAdded()
+
+        fun favRemoved()
     }
 
     interface Presenter{
@@ -17,6 +21,8 @@ interface MoviesGridContract {
         fun setView(view: View)
 
         fun onGetPopularMovies()
+
+        fun onFavoriteClicked(movie: Movie, appDatabase: MoviesDatabase)
 
     }
 

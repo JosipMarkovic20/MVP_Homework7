@@ -85,11 +85,11 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
     }
 
     override fun favAdded() {
-        activity?.displayToast(getString(R.string.Remove_fav))
+        activity?.displayToast(getString(R.string.Add_fav))
     }
 
     override fun favRemoved() {
-        activity?.displayToast(getString(R.string.Add_fav))
+        activity?.displayToast(getString(R.string.Remove_fav))
     }
 
     private fun onMovieClicked(movie: Movie) {

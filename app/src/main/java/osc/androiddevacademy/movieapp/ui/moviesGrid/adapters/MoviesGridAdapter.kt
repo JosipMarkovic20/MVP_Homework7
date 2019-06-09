@@ -16,6 +16,11 @@ class MoviesGridAdapter(private val onMovieClickListener: (Movie) -> Unit, priva
         notifyDataSetChanged()
     }
 
+    fun clearList(){
+        this.movies.clear()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesGridViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return MoviesGridViewHolder(view)

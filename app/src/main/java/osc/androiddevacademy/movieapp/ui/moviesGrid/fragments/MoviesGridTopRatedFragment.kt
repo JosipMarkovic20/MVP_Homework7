@@ -96,8 +96,7 @@ class MoviesGridTopRatedFragment : Fragment(), MoviesGridTopRatedContract.View {
             appDatabase.moviesDao().addFavoriteMovie(movie)
             activity?.displayToast(getString(R.string.Add_fav))
         }
-        val ft = fragmentManager!!.beginTransaction()
-        ft.detach(this).attach(this).commit()
+
     }
 
 }

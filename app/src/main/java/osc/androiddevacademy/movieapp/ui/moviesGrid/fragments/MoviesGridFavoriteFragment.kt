@@ -79,6 +79,8 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
     }
 
     override fun movieListEmpty() {
+        movieList.clear()
+        gridAdapter.clearList()
         favsText.visible()
     }
 
@@ -102,6 +104,7 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
             appDatabase.moviesDao().addFavoriteMovie(movie)
             activity?.displayToast(getString(osc.androiddevacademy.movieapp.R.string.Add_fav))
         }
+        presenter.onGetFavoriteMovies()
     }
 
 }

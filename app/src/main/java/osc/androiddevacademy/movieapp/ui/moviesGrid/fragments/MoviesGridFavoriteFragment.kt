@@ -11,12 +11,17 @@ import kotlinx.android.synthetic.main.fragment_favourite.*
 import osc.androiddevacademy.movieapp.App
 import osc.androiddevacademy.movieapp.R
 import osc.androiddevacademy.movieapp.common.displayToast
+import osc.androiddevacademy.movieapp.common.gone
 import osc.androiddevacademy.movieapp.common.showFragment
+import osc.androiddevacademy.movieapp.common.visible
 import osc.androiddevacademy.movieapp.database.MoviesDatabase
 import osc.androiddevacademy.movieapp.model.Movie
 import osc.androiddevacademy.movieapp.presentation.MoviesGridFavoritePresenter
 import osc.androiddevacademy.movieapp.ui.movieDetails.fragments.MoviesPagerFragment
 import osc.androiddevacademy.movieapp.ui.moviesGrid.adapters.MoviesGridAdapter
+
+
+
 
 class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
 
@@ -39,7 +44,7 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_favourite, container, false)
+        return inflater.inflate(osc.androiddevacademy.movieapp.R.layout.fragment_favourite, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +55,7 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
             layoutManager = GridLayoutManager(context, SPAN_COUNT)
         }
         presenter.setView(this)
+        favsText.visible()
         getFavorites()
     }
 
@@ -69,15 +75,16 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
         movieList.clear()
         movieList.addAll(movies)
         gridAdapter.setMovies(movies)
+        favsText.gone()
     }
 
     override fun movieListEmpty() {
-        activity?.displayToast(getString(R.string.no_favs))
+        favsText.visible()
     }
 
     private fun onMovieClicked(movie: Movie) {
         activity?.showFragment(
-            R.id.mainFragmentHolder,
+            osc.androiddevacademy.movieapp.R.id.mainFragmentHolder,
             MoviesPagerFragment.getInstance(
                 movieList,
                 movie
@@ -87,12 +94,13 @@ class MoviesGridFavoriteFragment : Fragment(), MoviesGridFavoriteContract.View {
     }
 
     private fun onFavoriteClicked(movie: Movie) {
-        if (movie.isFavorite) {
-            appDatabase.moviesDao().deleteFavoriteMovie(movie)
-            activity?.displayToast(getString(R.string.Remove_fav))
+        val findMovie: Movie? = appDatabase.moviesDao().getMovie(movie.id)
+        if(findMovie?.id==movie.id){
+            appDatabase.moviesDao().deleteFavoriteMovie(findMovie)
+            activity?.displayToast(getString(osc.androiddevacademy.movieapp.R.string.Remove_fav))
         }else{
             appDatabase.moviesDao().addFavoriteMovie(movie)
-            activity?.displayToast(getString(R.string.Add_fav))
+            activity?.displayToast(getString(osc.androiddevacademy.movieapp.R.string.Add_fav))
         }
     }
 

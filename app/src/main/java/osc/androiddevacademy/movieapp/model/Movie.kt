@@ -1,11 +1,13 @@
 package osc.androiddevacademy.movieapp.model
 
+import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parceler
 import kotlinx.android.parcel.Parcelize
 
 @Entity
@@ -22,4 +24,5 @@ data class Movie(
     @Ignore
     @IgnoredOnParcel
     var isFavorite: Boolean = false
+
 }

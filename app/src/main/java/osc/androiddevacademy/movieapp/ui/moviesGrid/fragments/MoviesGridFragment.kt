@@ -88,13 +88,16 @@ class MoviesGridFragment : Fragment(), MoviesGridContract.View {
     }
 
     private fun onFavoriteClicked(movie: Movie) {
-        if (movie.isFavorite) {
-            appDatabase.moviesDao().deleteFavoriteMovie(movie)
+        val findMovie: Movie? = appDatabase.moviesDao().getMovie(movie.id)
+        if(findMovie?.id==movie.id){
+            appDatabase.moviesDao().deleteFavoriteMovie(findMovie)
             activity?.displayToast(getString(R.string.Remove_fav))
         }else{
             appDatabase.moviesDao().addFavoriteMovie(movie)
             activity?.displayToast(getString(R.string.Add_fav))
         }
+        val ft = fragmentManager!!.beginTransaction()
+        ft.detach(this).attach(this).commit()
     }
 
 }
